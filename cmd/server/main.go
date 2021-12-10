@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/donghc/dcache/pkg/cache"
-	"github.com/donghc/dcache/pkg/server"
+	"github.com/donghc/dcache/pkg/http"
 )
 
 func main() {
 	c := cache.New("inMemoryCache")
-	server.New(c).Listen()
+	http.New(c).Listen()
 }
