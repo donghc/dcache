@@ -1,0 +1,44 @@
+before_script:
+  - go env -w GOPROXY=https://goproxy.cn,direct
+  - go env -w GO111MODULE=on
+stages:
+  - build
+  - test
+  - lint
+  - docker-deploy
+build:
+  stage: build
+  allow_failure: false
+  script:
+    - go mod tidy
+    - make
+  only:
+    - tags
+#    - branches
+  retry: 1
+test:
+  stage: test
+  allow_failure: true
+  script:
+    - echo $CI_COMMIT_REF_NAME
+  only:
+    - tags
+#    - branches
+  retry: 1
+lint:
+  stage: lint
+  allow_failure: true
+  script:
+    - golangci-lint --version
+    - golangci-lint run -v
+  only:
+    - tags
+#    - branches
+docker-deploy:
+  stage: docker-deploy
+  script:
+    - make
+#    - docker build --rm -t bigdata-harbor.nicetuan.net/risk/riskclient:$CI_COMMIT_REF_NAME .
+#    - docker push bigdata-harbor.nicetuan.net/risk/riskclient:$CI_COMMIT_REF_NAME
+  only:
+    - tags
