@@ -13,3 +13,25 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+.DS_Store
+# IntelliJ project files
+.idea
+.vscode
+*.iml
+out
+gen
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.pid
+*.gz
+*.zip
+
+
+
+node_modules
+logs
