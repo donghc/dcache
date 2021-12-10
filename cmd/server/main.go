@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"github.com/donghc/dcache/pkg/cache"
+	"github.com/donghc/dcache/pkg/server"
 )
 
 func main() {
 	c := cache.New("inMemoryCache")
-	fmt.Println(c)
+	server.New(c).Listen()
 }
