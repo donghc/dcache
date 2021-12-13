@@ -1,20 +1,23 @@
 package main
 
 import (
-	"net/http"
-	"time"
+	"flag"
+	"fmt"
+	"github.com/donghc/dcache/pkg/cacheClient"
 )
 
 func main() {
-	http.HandleFunc("/stuck", func(w http.ResponseWriter, r *http.Request) {
-		time.Sleep(1000 * time.Second)
-
-		w.Write([]byte("hello world!"))
-	})
-
-	http.HandleFunc("/normal", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("this is normal func"))
-	})
-
-	http.ListenAndServe("127.0.0.1:8080", nil)
+	server := flag.String("h", "localhost", "cache server address")
+	op := flag.String("c", "get", "command, could be get/set/del")
+	key := flag.String("k", "", "key")
+	value := flag.String("v", "", "value")
+	flag.Parse()
+	client := cacheClient.New("tcp", *server)
+	cmd := &cacheClient.Cmd{Name: *op, Key: *key, Value: *value}
+	client.Run(cmd)
+	if cmd.Error != nil {
+		fmt.Println("error :", cmd.Error)
+	} else {
+		fmt.Println(cmd.Value)
+	}
 }
