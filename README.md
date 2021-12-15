@@ -18,5 +18,9 @@ PUT /cache/key
 
 4:State 状态查询接口
 
+### 基于tcp的内存服务
+
+
+
 
 
