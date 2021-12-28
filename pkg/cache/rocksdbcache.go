@@ -4,8 +4,8 @@ package cache
 // #include "rocksdb/c.h"
 // #cgo CFLAGS: -I${SRCDIR}/../../rocksdb/include
 // #cgo LDFLAGS: -L${SRCDIR}/../../rocksdb -lrocksdb -lz -lpthread -lsnappy -lstdc++ -lm -O3
-
 import "C"
+
 import (
 	"errors"
 	"regexp"

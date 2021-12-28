@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	c := cache.New("inMemoryCache")
+	c := cache.New("rocksdb")
 	go tcp.New(c).Listen()
 	http.New(c).Listen()
 }

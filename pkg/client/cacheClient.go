@@ -1,4 +1,4 @@
-package cacheClient
+package client
 
 // Cmd : command submitted by client to run on cache server
 type Cmd struct {
